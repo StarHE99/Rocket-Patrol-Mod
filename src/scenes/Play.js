@@ -6,6 +6,7 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('starfield', 'assets/starfield.png');
         this.load.image('rocket', 'assets/devil.png');
+        this.load.image('bobback', 'assets/bobback.png');
         this.load.image('spaceship', 'assets/angel.png');
         this.load.image('angel2', 'assets/angel2.png');
         // load spritesheet
@@ -52,16 +53,22 @@ class Play extends Phaser.Scene {
             0,
             30
         );
-        
         //new enemy ship
-        this.shipNew = new RocketNew(this, game.config.width, borderUISize*2 + borderPadding*5, 'angel2', 0, 100).setOrigin(0,0);
+        this.shipNew = new EnemyNew(
+            this,
+            280,
+            200,
+            'angel2',
+            0,
+            100
+            );
         // green UI background
         this.add.rectangle(
             0,
             borderUISize + borderPadding,
             game.config.width,
             borderUISize * 2,
-            0xFFFFFF,
+            'bobback',
             ).setOrigin(0,0);
 
         // white borders change this
@@ -84,7 +91,7 @@ class Play extends Phaser.Scene {
             fontFamily: 'Courier New',
             fontSize: '28px',
             backgroundColor: '#FF57CD',
-            color: '#250070',
+            color: '#E5B7F6',
             align: 'right',
             padding: {
             top: 5,
@@ -116,7 +123,7 @@ class Play extends Phaser.Scene {
         // check collisions
         if(this.checkCollision(this.p1Rocket, this.shipNew)) {
             this.p1Rocket.reset();
-            this.shipExplode(this.ship3);
+            this.shipExplode(this.shipNew);
               
         }
         if(this.checkCollision(this.p1Rocket, this.ship3)) {
