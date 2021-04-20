@@ -56,7 +56,7 @@ class Play extends Phaser.Scene {
         
         //new enemy ship
         this.shipNew = new RocketNew(this, game.config.width, borderUISize*2 + borderPadding*5, 'angel2', 0, 100).setOrigin(0,0);
-        // green UI background
+        // white UI background
         this.add.rectangle(
             0,
             borderUISize + borderPadding,
@@ -170,7 +170,7 @@ class Play extends Phaser.Scene {
         // temporarily hide ship
         ship.alpha = 0;                         
         // create explosion sprite at ship's position
-        let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
+        let boom = this.add.sprite(ship.x-20, ship.y-10, 'explosion').setOrigin(0, 0);
         boom.anims.play('explode');             // play explode animation
         boom.on('animationcomplete', () => {    // callback after ani completes
           ship.reset();                       // reset ship position
@@ -181,6 +181,7 @@ class Play extends Phaser.Scene {
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;  
         console.log("ahhhh"); 
+        //random explosions
         this.sound.play(Phaser.Math.RND.pick(['sfx_explosion','sfx_explosion2','sfx_explosion3','sfx_explosion4']));    
       }
 }
