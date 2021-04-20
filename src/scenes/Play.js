@@ -83,8 +83,8 @@ class Play extends Phaser.Scene {
         let scoreConfig = {
             fontFamily: 'Courier New',
             fontSize: '28px',
-            backgroundColor: '#FF57CD',
-            color: '#250070',
+            backgroundColor: '#FFFFBD',
+            color: '#FF4DBE',
             align: 'right',
             padding: {
             top: 5,
@@ -101,10 +101,10 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;}, null, this);
+        
     }
 
     update() {
-        
         this.starfield.tilePositionX -= 4;
         if(!this.gameOver){
         this.p1Rocket.update();
@@ -116,7 +116,7 @@ class Play extends Phaser.Scene {
         // check collisions
         if(this.checkCollision(this.p1Rocket, this.shipNew)) {
             this.p1Rocket.reset();
-            this.shipExplode(this.ship3);
+            this.shipExplode(this.shipNew);
               
         }
         if(this.checkCollision(this.p1Rocket, this.ship3)) {

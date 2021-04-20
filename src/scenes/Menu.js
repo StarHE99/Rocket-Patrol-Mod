@@ -4,7 +4,7 @@ class Menu extends Phaser.Scene {
   }
   preload() {
       //load background
-      this.load.image('bobback', 'assets/bobback.png');
+      this.load.image('ui', 'assets/ui.png');
       // load audio
       this.load.audio('sfx_select', './assets/blip_select12.wav');
       this.load.audio('sfx_explosion', './assets/explosion1.wav');
@@ -14,11 +14,12 @@ class Menu extends Phaser.Scene {
       this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
     }
   create() {
+      this.add.rectangle(0, 0, 640, 480, 0x008080).setOrigin(0 ,0);
+        this.popup = this.add.tileSprite(0,0,640,480, 'ui').setOrigin(0,0);
       let menuConfig = {
           fontFamily: 'Courier New',
-          fontSize: '28px',
-          texture: 'bobback',
-          color: '#4700D6',
+          fontSize: '23px',
+          color: '#FF4DBE',
           align: 'right',
           padding: {
           top: 5,
@@ -30,7 +31,6 @@ class Menu extends Phaser.Scene {
       this.add.text(game.config.width/2,game.config.height/2-borderUISize-borderPadding, 'Hell Fire', menuConfig).setOrigin(0.5);
       this.add.text(game.config.width/2, game.config.height/2, 
           'Use <--> arrows to move & (F) to fire', menuConfig).setOrigin(0.5);
-          menuConfig.backgroundColor='#85FF85';
           menuConfig.color='#E5B7F6';
           this.add.text(game.config.width/2, game.config.height/2+borderUISize+borderPadding,'Press <- for Novice or -> for Expert', menuConfig).setOrigin(0.5);
       // define keys
