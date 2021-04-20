@@ -15,7 +15,7 @@ class Menu extends Phaser.Scene {
     }
   create() {
       this.add.rectangle(0, 0, 640, 480, 0x008080).setOrigin(0 ,0);
-        this.popup = this.add.tileSprite(0,0,640,480, 'ui').setOrigin(0,0);
+        this.UI = this.add.tileSprite(0,0,640,480, 'ui').setOrigin(0,0);
       let menuConfig = {
           fontFamily: 'Courier New',
           fontSize: '23px',

@@ -6,6 +6,7 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('starfield', 'assets/starfield.png');
         this.load.image('rocket', 'assets/devil.png');
+        this.load.image('border', 'assets/border.png');
         this.load.image('spaceship', 'assets/angel.png');
         this.load.image('angel2', 'assets/angel2.png');
         // load spritesheet
@@ -64,11 +65,11 @@ class Play extends Phaser.Scene {
             0xFFFFFF,
             ).setOrigin(0,0);
 
-        // white borders change this
-	    this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-	    this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-	    this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
-	    this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
+        // UI boarders
+	    this.UI= this.add.tileSprite(0,0,game.config.width,borderUISize, 'ui').setOrigin(0,0);
+	    this.UI= this.add.tileSprite(0,game.config.height - borderUISize,game.config.width,borderUISize, 'ui').setOrigin(0,0);
+	    this.UI= this.add.tileSprite(0,0,borderUISize,game.config.height, 'border').setOrigin(0,0);
+        this.UI= this.add.tileSprite(game.config.width - borderUISize,0,borderUISize,game.config.height, 'border').setOrigin(0,0);
 
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
@@ -101,10 +102,24 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;}, null, this);
-        
+        this.p1Time=game.settings.gameTimer;
+        let timeConfig = {
+            fontFamily: 'Courier New',
+            fontSize: '28px',
+            backgroundColor: '#FFFFBD',
+            color: '#FF4DBE',
+            align: 'right',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 100
+        }
+        this.timeLeft = this.add.text(borderUISize + borderPadding*15, borderUISize + borderPadding*2, this.p1Time, timeConfig);
     }
 
     update() {
+        this.timeLeft.text = this.p1Time;
         this.starfield.tilePositionX -= 4;
         if(!this.gameOver){
         this.p1Rocket.update();
