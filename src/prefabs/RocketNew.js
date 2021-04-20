@@ -3,7 +3,7 @@ class RocketNew extends Phaser.GameObjects.Sprite{
         super (scene, x, y, texture, frame);
         scene.add.existing(this);
         this.points = pointValue;
-        this.moveSpeed = game.settings.spaceshipSpeed*2;
+        this.moveSpeed = game.settings.spaceshipSpeed*1.5;
     }
 
     update(){
