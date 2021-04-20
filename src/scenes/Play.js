@@ -166,6 +166,6 @@ class Play extends Phaser.Scene {
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;  
         console.log("ahhhh"); 
-        this.sound.play('sfx_explosion');    
+        this.sound.play(Phaser.Math.RND.pick(['sfx_explosion','sfx_explosion2','sfx_explosion3','sfx_explosion4']));    
       }
 }
